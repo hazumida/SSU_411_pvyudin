@@ -1,16 +1,48 @@
 package com.company;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by Павел on 26.02.2016.
+ * Created by UdinPV on 26.02.2016.
  */
+public class Basket implements IBasket {
+    Map<String, Integer> basket = new HashMap<String, Integer>();
 
-public interface Basket {
-    void addProduct(String product, int quantity);
-    void removeProduct(String product);
-    void updateProductQuantity(String product, int quantity);
-    void clear();
-    List<String> getProducts();
-    int getProductQuantity(String product);
+    @Override
+    public void addProduct(String product, int quantity) {
+        basket.put(product, quantity);
+    }
+
+    @Override
+    public void removeProduct(String product) {
+        basket.remove(product);
+    }
+
+    @Override
+    public void updateProductQuantity(String product, int quantity) {
+        basket.replace(product, quantity);
+    }
+
+    @Override
+    public void clear() {
+        basket.clear();
+    }
+
+    @Override
+    public List<String> getProducts() {
+        for (String key : basket.keySet()) {
+            System.out.println(key);
+        }
+        if (basket.size()  == 0) {
+            System.out.println("Корзина пуста");
+        }
+        return null;
+    }
+
+    @Override
+    public int getProductQuantity(String product) {
+        return basket.get(product);
+    }
 }

@@ -1,63 +1,12 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Main implements Basket{
-    ArrayList<String> basket = new ArrayList<String>();
-
-    @Override
-    public void addProduct(String product, int quantity) {
-        basket.add(product);
-        basket.add(String.valueOf(quantity));
-    }
-
-    @Override
-    public void removeProduct(String product) {
-        for (int i = 0; i < basket.size(); i++) {
-            if (product.equals(String.valueOf(basket.get(i)))) {
-                basket.remove(i + 1);
-                basket.remove(i);
-            }
-        }
-    }
-
-    @Override
-    public void updateProductQuantity(String product, int quantity) {
-        for (int i = 0; i < basket.size(); i++) {
-            if (product.equals(String.valueOf(basket.get(i)))) {
-                basket.set(i + 1, String.valueOf(quantity));
-            }
-        }
-    }
-
-    @Override
-    public void clear() {
-        basket.clear();
-    }
-
-    @Override
-    public List<String> getProducts() {
-        for (int i = 0; i < basket.size(); i = i + 2) {
-            System.out.println(basket.get(i));
-        }
-        return null;
-    }
-
-    @Override
-    public int getProductQuantity(String product) {
-        for (int i = 0; i < basket.size(); i++) {
-            if (product.equals(String.valueOf(basket.get(i)))) {
-                System.out.println(basket.get(i + 1));
-            }
-        }
-        return 0;
-    }
-
+public class Main {
     public static void main(String[] args) {
+        IBasket basket = new Basket();
         int flag = 1, main = 1;
-        Main basket = new Main();
+
 	   while (flag == 1) {
            System.out.println("Выберите один из вариантов:");
            System.out.println("1 - добавить продукт");
@@ -146,7 +95,7 @@ public class Main implements Basket{
                System.out.println("Введите название продукта:");
                Scanner scanner = new Scanner(System.in);
                String product = scanner.nextLine();
-               basket.getProductQuantity(product);
+               System.out.println(basket.getProductQuantity(product));
                main = 1;
            }
            if (i == 7) {
